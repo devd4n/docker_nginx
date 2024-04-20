@@ -3,6 +3,8 @@ services:
   nginx:
     restart: always
     image: nginx:latest
+    networks:
+      - net_nginx
     ports:
       - 8443:8443
     volumes:
