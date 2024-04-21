@@ -12,12 +12,13 @@ services:
       - 8181:8181
     volumes:
       - ${NGINX_CONF_DIR}:/etc/nginx/conf.d/:ro
-      - ${NGINX_LETSENCR_DIR}:/var/www/certbot/:ro
+      - ${NGINX_CERTBOT_DIR}:/var/www/certbot/:ro
+      - ${NGINX_LETSENCR_DIR}:/etc/letsencrypt/:ro
   certbot:
     image: certbot/certbot:latest
     volumes:
-      - ${NGINX_LETSENCR_DIR}:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
+      - ${NGINX_CERTBOT_DIR}:/var/www/certbot/
+      - ${NGINX_LETSENCR_DIR}:/etc/letsencrypt/
 networks:
   net_app1:
   net_app2:
