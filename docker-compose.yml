@@ -19,6 +19,8 @@ services:
     volumes:
       - ${NGINX_CERTBOT_DIR}:/var/www/certbot/
       - ${NGINX_LETSENCR_DIR}:/etc/letsencrypt/
+    depends_on:
+      - nginx
 networks:
   net_app1:
   net_app2:
