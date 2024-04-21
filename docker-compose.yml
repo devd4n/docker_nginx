@@ -6,7 +6,9 @@ services:
     networks:
       - net_nginx
     ports:
-      - 8443:8443
+      - 443:443
+      - 80:80
+      - 8181:8181
     volumes:
       - ${NGINX_CONF_DIR}:/etc/nginx/conf.d/:ro
       - ${NGINX_LETSENCR_DIR}:/var/www/certbot/:ro
