@@ -4,8 +4,7 @@ services:
     restart: always
     image: nginx:latest
     networks:
-      - net_app1
-      - net_app2
+      - net_app
     ports:
       - 443:443
       - 80:80
@@ -19,8 +18,12 @@ services:
     volumes:
       - ${NGINX_CERTBOT_DIR}:/var/www/certbot/
       - ${NGINX_LETSENCR_DIR}:/etc/letsencrypt/
+    command: >-
+      certonly --reinstall --webroot --webroot-path=/var/www/certbot
+      --email ${EMAIL} --agree-tos --no-eff-email -d ${DOMAIN}
     depends_on:
       - nginx
 networks:
-  net_app1:
-  net_app2:
+  net_app:
+    name: net_app_1
+    external: true
